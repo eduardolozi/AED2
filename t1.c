@@ -1,4 +1,5 @@
-// Aluno: Eduardo Lozano Azevedo
+/* Código que administra uma lista de, no máximo, 50 alunos. Cada aluno possui nome, matrícula, curso, nota 1 e nota 2. 
+As funções são de criação, leitura, atualização e exclusão. */
 
 #include <stdio.h>
 #include <stdlib.h>
