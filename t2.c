@@ -1,4 +1,4 @@
-// Aluno: Eduardo Lozano Azevedo (202103718)
+/* Código que implementa o CRUD de uma sala de aula, utilizando lista duplamente encadeada circular */
 
 #include <stdio.h>
 #include <stdlib.h>
