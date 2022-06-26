@@ -1,11 +1,11 @@
-/* Código que implementa o CRUD de uma sala de aula, utilizando lista duplamente encadeada circular */
+// Realiza o CRUD e ordenaçao de uma lista circular duplamente encadeada
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 typedef struct aluno{
-    float nota1, nota2;
+    float nota1, nota2, media;
     int matricula;
     char nome[50], curso[50];
 } Aluno;
@@ -31,6 +31,8 @@ int validationMat(Lista lista, int mat);
 void updateStudent(Lista *lista);
 
 void deleteStudent(Lista *lista);
+
+void ordenaMedias(Lista *lista);
 
 void readList(Lista lista);
 
@@ -107,6 +109,22 @@ int main() {
         readList(lista);
     }
 
+    printf("\n");
+    printf("Você quer ordenar a lista em relação às médias? Digite S ou N\n");
+    scanf("%c%*c", &resp);
+    if(resp != 'S' && resp != 'N') {
+            while(resp != 'S' && resp != 'N') {
+                printf("Digite S ou N: ");
+                scanf("%c%*c", &resp);
+            }
+    }
+    if(resp == 'S') {
+        system("clear||cls");
+        ordenaMedias(&lista);
+        printf("A lista ordenada se encontra assim:\n");
+        readList(lista);
+    }
+
     liberaMemoria(&lista);
 
     return 0;
@@ -153,6 +171,8 @@ void addStudent(Lista *lista) {
             scanf("%f%*c", &student.nota2);
         }   
     }
+
+    student.media = (student.nota1 + student.nota2) / 2.0;
 
     novo->item = student;
     if(lista->tamanho == 0) {
@@ -261,6 +281,8 @@ void updateStudent(Lista *lista) {
             scanf("%c%*c", &letra);  
         }while(letra != 'N');
 
+        aux->item.media = (aux->item.nota1 + aux->item.nota2) / 2.0;
+
         system("clear||cls");
         printf("------------ REGISTRO DO ALUNO ANTES DAS MUDANÇAS ------------\n");
         printf("Nome: %s\nMatrícula: %d\nCurso: %s\nNota 1: %.2f\nNota 2 : %.2f\n", temporario.nome, temporario.matricula, temporario.curso, temporario.nota1, temporario.nota2);
@@ -350,5 +372,26 @@ void liberaMemoria(Lista *lista) {
             free(aux->anterior);
         }
         free(aux); //desaloca o ultimo elemento da lista, que nao havia sido desalocado no while
+    }
+}
+
+void ordenaMedias(Lista *lista) {
+    No *temp1 = (No*) malloc(sizeof(No));
+    No *temp2 = (No*) malloc(sizeof(No));
+    Aluno swap;
+    int i, j;
+
+    temp1 = lista->primeiro;
+    for(i=0;i<(lista->tamanho-1);i++) {
+        temp2 = temp1->proximo;
+        for(j=i+1;j<lista->tamanho;j++) {
+            if(temp1->item.media < temp2->item.media) {
+                swap = temp1->item;
+                temp1->item = temp2->item;
+                temp2->item = swap;
+            }
+            temp2 = temp2->proximo;
+        }
+        temp1 = temp1->proximo;
     }
 }
