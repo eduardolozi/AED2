@@ -1,3 +1,4 @@
+// Aplicação de uma calculadora pós-fixada usando Árvore Binária
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
