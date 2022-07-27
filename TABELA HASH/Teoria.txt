@@ -1,0 +1,7 @@
+TAMANHO DO VETOR:	2 x Numero de elementos (primo mais próximo do resultado)
+
+FATOR DE CARGA: fc = Numero de elementos / tamanho (se estiver perto de 0 ou 1 é ruim, o melhor é estar no meio)
+
+FUNÇÃO HASH: numero % tamanho = (posicao na tabela)
+
+COLISÕES: QUANDO UMA CHAVE É MANDADA PARA UMA POSIÇÃO JÁ OCUPADA. NESSE CASO PODEMOS IR JOGANDO ESSA CHAVE PARA A PROXIMA POSIÇAO VAZIA. OU ENTAO PODEMOS FAZER UM VETOR EM QUE CADA POSIÇÃO APONTA PARA UMA LISTA ENCADEADA.
